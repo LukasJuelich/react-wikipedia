@@ -10,7 +10,7 @@ const WikipediaSearch: React.FC = () => {
 			setResults(["ERROR: Please enter a longer search term(at least 4 characters)!"]);
 		}
 		else {
-			var wikiURL = "https://de.wikipedia.org/w/api.php?action=opensearch&search="
+			var wikiURL =	"https://de.wikipedia.org/w/api.php?action=opensearch&search="
 							+ query +
 							"&limit=10&format=json&origin=*";
 			var response = await fetch(wikiURL);
@@ -48,7 +48,9 @@ const WikipediaSearch: React.FC = () => {
 			<Stack.Item>
 				<Stack horizontal tokens={{ childrenGap: '0.5rem' }}>
 					<Stack.Item>
-						<TextField onKeyPress={(event) => event.key === "Enter" ? searchWiki() : ""} onChange={(event, newValue) => setQuery(newValue != null ? newValue : "")} value={query}/>
+						<TextField	onKeyPress={(event) => { if(event.key === "Enter") searchWiki() }} 
+									onChange={(event, newValue) =>{ if(newValue != null)setQuery(newValue) }}
+									value={query}/>
 					</Stack.Item>
 					<Stack.Item>
 						<DefaultButton text="Search" type="submit" onClick={searchWiki} />
@@ -60,9 +62,7 @@ const WikipediaSearch: React.FC = () => {
 					<Text variant={'large'}>Search results:</Text>
 				</div>
 				<div>
-					{
-						results
-					}
+					{results}
 				</div>
 			</Stack.Item>
 		</Stack>
