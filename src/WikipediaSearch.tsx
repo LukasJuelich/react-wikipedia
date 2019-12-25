@@ -24,17 +24,17 @@ const WikipediaSearch: React.FC = () => {
 		var reformattedData = [];
 		
 		for(var i = 0; i < data[1].length; i++){
-			var html = (<div style={{paddingBottom: "25px"}}>
-							<a	target="_blank" rel="noopener noreferrer" 
-								href={data[3][i]}
-							>
-								{data[1][i]+":"}
-							</a>
-							<br />
-								{data[2][i]}
-						</div>
-					);
-			reformattedData.push(html);
+			reformattedData.push(
+				<div style={{paddingBottom: "25px"}}>
+					<a	target="_blank" rel="noopener noreferrer" 
+						href={data[3][i]}
+					>
+						{data[1][i]+":"}
+					</a>
+					<br />
+						{data[2][i]}
+				</div>
+			);
 		}
 
 		return reformattedData;
@@ -48,7 +48,7 @@ const WikipediaSearch: React.FC = () => {
 			<Stack.Item>
 				<Stack horizontal tokens={{ childrenGap: '0.5rem' }}>
 					<Stack.Item>
-						<TextField	onKeyPress={(event) => { if(event.key === "Enter") searchWiki() }} 
+						<TextField	onKeyPress={(event) => { if(event.key === "Enter") searchWiki() }}
 									onChange={(event, newValue) =>{ if(newValue != null)setQuery(newValue) }}
 									value={query}/>
 					</Stack.Item>
